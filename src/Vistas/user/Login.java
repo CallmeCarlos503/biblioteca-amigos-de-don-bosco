@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Vistas;
+package Vistas.user;
 import objectos.Usuario;
 import DAO.UsuarioDAO;
 import javax.swing.JOptionPane;
@@ -136,8 +136,9 @@ public class Login extends javax.swing.JFrame {
         String Password=txtpassword.getText();
         Usuario usuario= UsuarioDAO.iniciarSesion(Carnet,Password);
         if (usuario != null) {
-                    JOptionPane.showMessageDialog(Login.this, "Credenciales validas",
-                            " inicio de sesión", JOptionPane.INFORMATION_MESSAGE);
+                    Menu Menu= new Menu();
+                    Menu.setVisible(true);
+                    this.setVisible(false);
                 } else {
                     // Inicio de sesión fallido
                     JOptionPane.showMessageDialog(Login.this, "Credenciales inválidas",

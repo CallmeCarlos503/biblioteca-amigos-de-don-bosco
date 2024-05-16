@@ -11,20 +11,20 @@ package objectos;
 public class Usuario {
 
     String NOMBRE, APELLIDO, CARNET,PASSWORD;
+    int ID_ROL, ID_ESTADO,Limites_de_libros;
     int ID;
-    int ID_ROL, ID_ESTADO;
 
-    public Usuario(int ID, String NOMBRE, String APELLIDO, String CARNET, String PASSWORD, int ID_ROL, int ID_ESTADO) {
+    public Usuario() {
+    }
+
+    public Usuario(String NOMBRE, String APELLIDO, String CARNET, String PASSWORD, int ID_ROL, int ID_ESTADO, int Limites_de_libros) {
         this.NOMBRE = NOMBRE;
         this.APELLIDO = APELLIDO;
         this.CARNET = CARNET;
         this.PASSWORD = PASSWORD;
-        this.ID = ID;
         this.ID_ROL = ID_ROL;
         this.ID_ESTADO = ID_ESTADO;
-    }
-
-    public Usuario() {
+        this.Limites_de_libros = Limites_de_libros;
     }
 
     public String getNOMBRE() {
@@ -59,14 +59,6 @@ public class Usuario {
         this.PASSWORD = PASSWORD;
     }
 
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
     public int getID_ROL() {
         return ID_ROL;
     }
@@ -83,6 +75,20 @@ public class Usuario {
         this.ID_ESTADO = ID_ESTADO;
     }
 
-   
+    public int getLimites_de_libros() {
+        return Limites_de_libros;
+    }
+
+    public void setLimites_de_libros(int Limites_de_libros) {
+        this.Limites_de_libros = Limites_de_libros;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+      
 }
-//NOMBRE, APELLIDO, CARNET, ID_ROL, ID_ESTADO
