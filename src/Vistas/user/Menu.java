@@ -4,6 +4,10 @@
  */
 package Vistas.user;
 
+import DAO.UsuarioDAO;
+import Vistas.libros.admin_books;
+import objectos.Usuario;
+
 /**
  *
  * @author Carlo
@@ -15,6 +19,20 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
+        UsuarioDAO DAO= new UsuarioDAO();
+        
+       int Rol=DAO.Permanencia;
+       String Carnet=DAO.Carnet_permanencia;
+        System.out.println(Carnet);
+        System.out.println(Rol);
+        jButton1.setEnabled(true);
+        jButton2.setEnabled(true);
+        jButton3.setEnabled(true);
+        jButton4.setEnabled(true);
+        if(Rol==3){
+            jButton2.setEnabled(false);
+            jButton1.setEnabled(false);
+        }
     }
 
     /**
@@ -54,7 +72,7 @@ public class Menu extends javax.swing.JFrame {
         });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/book.png"))); // NOI18N
-        jButton3.setText("Administracion de Categorias");
+        jButton3.setText("Administracion de Moras");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -82,7 +100,7 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
                     .addComponent(jButton3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 333, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 345, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -116,6 +134,9 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        admin_books Book= new admin_books();
+        Book.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

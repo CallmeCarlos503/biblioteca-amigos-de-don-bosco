@@ -16,7 +16,8 @@ import objectos.Usuario;
  * @author Carlo
  */
 public class UsuarioDAO {
-
+    public static int Permanencia;
+    public static  String Carnet_permanencia;
     public  void insertarUsuario(Usuario usuario) {
         String query = "INSERT INTO USUARIO (NOMBRE, APELLIDO, CARNET,PASSWORD, ID_ROL, ID_ESTADO,LIMITES) VALUES (?, ?, ?, ?, ?,?,?)";
 
@@ -53,7 +54,7 @@ public class UsuarioDAO {
         try (Connection conn = DatabaseConnection.getConnection(); PreparedStatement statement = conn.prepareStatement(query)) {
             statement.setString(1, carnet);
             statement.setString(2, contraseña);
-
+            
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     
@@ -63,10 +64,14 @@ public class UsuarioDAO {
                     int rol = resultSet.getInt("ID_ROL");
                     int estado = resultSet.getInt("ID_ESTADO");
                     int Limites = resultSet.getInt("LIMITES");
+                    Permanencia=resultSet.getInt("ID_ROL");
+                    Carnet_permanencia=carnet;
                     Usuario us= new Usuario(nombre,apellido,carnet,Password,rol,estado,Limites);
                    
                     return us;
                 }
+               
+                
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -111,6 +116,7 @@ public class UsuarioDAO {
                     String apellido = resultSet.getString("APELLIDO");
                     String Password = resultSet.getString("PASSWORD");
                     int rol = resultSet.getInt("ID_ROL");
+                    
                     int estado = resultSet.getInt("ID_ESTADO");
                     int Limites = resultSet.getInt("LIMITES");
                     Usuario usuario= new Usuario(nombre,apellido,carnet,Password,rol,estado,Limites);

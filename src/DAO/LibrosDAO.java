@@ -22,11 +22,12 @@ public class LibrosDAO {
         List<Libros> Libro = new ArrayList<>();
         try (Connection conn = DatabaseConnection.getConnection(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery("SELECT*FROM LIBROS")) {
             while (rs.next()) {
+                int ID=rs.getInt("ID");
                 String NOMBRE = rs.getString("NOMBRE");
                 int Estado = rs.getInt("ID_ESTADO");
                 int ID_Categoria = rs.getInt("ID_CATEGORIA");
                 int Cantidad = rs.getInt("CANTIDAD_DISPONIBLE");
-                Libros lb = new Libros(NOMBRE, Estado, ID_Categoria, Cantidad);
+                Libros lb = new Libros(ID,NOMBRE, Estado, ID_Categoria, Cantidad);
                 Libro.add(lb);
             }
         } catch (Exception ex) {
@@ -55,12 +56,13 @@ public class LibrosDAO {
             statement.setInt(1, ID);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
-                    String Nombre=resultSet.getString("NOMBRE");
-                    int Estado=resultSet.getInt("ID_ESTADO");
-                    int Categoria=resultSet.getInt("ID_CATEGORIA");
-                    
-                    int Cantidad_Disponible=resultSet.getInt("CANTIDAD_DISPONIBLE");
-                    Libros Libros= new Libros(Nombre,Estado,Categoria,Cantidad_Disponible);
+                    int ID2= resultSet.getInt("ID");
+                    String Nombre = resultSet.getString("NOMBRE");
+                    int Estado = resultSet.getInt("ID_ESTADO");
+                    int Categoria = resultSet.getInt("ID_CATEGORIA");
+
+                    int Cantidad_Disponible = resultSet.getInt("CANTIDAD_DISPONIBLE");
+                    Libros Libros = new Libros(ID2,Nombre, Estado, Categoria, Cantidad_Disponible);
                     return Libros;
                 }
             }
@@ -69,5 +71,31 @@ public class LibrosDAO {
         }
         return null;
     }
-
+    
+    public void Actualizar_Books(String Nombre,int Estado,int Categoria,int Cantidad,int ID){
+        String Query="UPDATE libros set NOMBRE=?,ID_ESTADO=?,ID_CATEGORIA=?,CANTIDAD_DISPONIBLE=? WHERE ID=?";
+        try (Connection conn = DatabaseConnection.getConnection(); PreparedStatement statement = conn.prepareStatement(Query)) {
+            statement.setString(1, Nombre);
+            statement.setInt(2, Estado);
+            statement.setInt(3, Categoria);
+            statement.setInt(4, Cantidad);
+            statement.setInt(5, ID);
+            
+            statement.executeUpdate();
+        }catch(Exception ex){
+            
+        }
+    }
+    public void Eliminacion_Books(int ID){
+        String Query="DELETE FROM libros WHERE ID=?";
+        try (Connection conn = DatabaseConnection.getConnection(); PreparedStatement statement = conn.prepareStatement(Query)) {
+            statement.setInt(1, ID);
+            
+            statement.executeUpdate();
+        }catch(Exception ex){
+            
+        }
+    }
+    
+    
 }

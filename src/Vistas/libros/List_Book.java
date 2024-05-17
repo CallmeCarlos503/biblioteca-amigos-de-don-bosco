@@ -30,6 +30,7 @@ public class List_Book extends javax.swing.JFrame {
     }
     private void CargarBooks(){
         DefaultTableModel Model= new DefaultTableModel ();
+        Model.addColumn("ID");
         Model.addColumn("Nombre");
         Model.addColumn("Cantidad Disponible");
         Model.addColumn("Estado");
@@ -63,7 +64,9 @@ public class List_Book extends javax.swing.JFrame {
                 Categorias="Diccionario de terminologia";
             }
             Object[] fila={
+                libro.getID(),
              libro.getNombre(),
+                
                libro.getCantidad_Disponible(),
                Estado,
                Categorias
@@ -106,6 +109,11 @@ public class List_Book extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/lapiz.png"))); // NOI18N
         jButton1.setText("Administrar Libros");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/lapiz.png"))); // NOI18N
@@ -153,6 +161,13 @@ public class List_Book extends javax.swing.JFrame {
         books.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Edits_Books Books= new Edits_Books();
+        Books.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

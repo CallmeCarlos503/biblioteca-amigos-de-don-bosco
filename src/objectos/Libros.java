@@ -18,7 +18,8 @@ public class Libros {
     public Libros() {
     }
 
-    public Libros(String Nombre, int Estado, int ID_Categoria, int Cantidad_Disponible) {
+    public Libros(int ID,String Nombre, int Estado, int ID_Categoria, int Cantidad_Disponible) {
+        this.ID=ID;
         this.Nombre = Nombre;
         this.Estado = Estado;
         this.ID_Categoria = ID_Categoria;
