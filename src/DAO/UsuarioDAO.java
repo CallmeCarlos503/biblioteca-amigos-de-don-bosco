@@ -18,6 +18,7 @@ import objectos.Usuario;
 public class UsuarioDAO {
     public static int Permanencia;
     public static  String Carnet_permanencia;
+    public static String Nombre;
     public  void insertarUsuario(Usuario usuario) {
         String query = "INSERT INTO USUARIO (NOMBRE, APELLIDO, CARNET,PASSWORD, ID_ROL, ID_ESTADO,LIMITES) VALUES (?, ?, ?, ?, ?,?,?)";
 
@@ -66,6 +67,7 @@ public class UsuarioDAO {
                     int Limites = resultSet.getInt("LIMITES");
                     Permanencia=resultSet.getInt("ID_ROL");
                     Carnet_permanencia=carnet;
+                    Nombre=nombre;
                     Usuario us= new Usuario(nombre,apellido,carnet,Password,rol,estado,Limites);
                    
                     return us;

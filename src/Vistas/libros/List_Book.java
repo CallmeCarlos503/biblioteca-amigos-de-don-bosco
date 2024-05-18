@@ -42,6 +42,9 @@ public class List_Book extends javax.swing.JFrame {
         int Control;
         String Categorias="";
         String Estado;
+        
+        
+        
         for(Libros libro: libros){
             Control=libro.getEstado();
             if(Control==1){

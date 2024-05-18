@@ -230,7 +230,7 @@ public class admin_usuarios extends javax.swing.JFrame {
             txtCarnet.setText("");
             txtPassword.setText("");
             txtLimites.setText("");            
-            JOptionPane.showMessageDialog(this, "Insercion de datos","Insercion Exitosa", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Insercion Exitosa","Insercion de datos", JOptionPane.INFORMATION_MESSAGE);
         }catch(Exception ex){
             System.out.print("erorr:"+ex);
             JOptionPane.showMessageDialog(this, "Invalidez de datos",

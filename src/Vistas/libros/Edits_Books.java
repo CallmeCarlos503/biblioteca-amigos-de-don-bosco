@@ -199,7 +199,7 @@ public class Edits_Books extends javax.swing.JFrame {
         int ID = Integer.parseInt(txtID.getText());
         ID_General=ID;
         LibrosDAO DAO = new LibrosDAO();
-        Libros libros = DAO.busqueda_Libros(ID);
+        Libros libros = DAO.busqueda_Libros(ID_General);
         String Nombre = libros.getNombre();
         if (libros.getEstado() == 1) {
             cboEstado.setSelectedIndex(0);

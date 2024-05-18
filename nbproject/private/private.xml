@@ -3,12 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Carlo/Documents/NetBeansProjects/Bibliotecas/src/Connection/TestConexion.java</file>
-            <file>file:/C:/Users/Carlo/Documents/NetBeansProjects/Bibliotecas/src/Vistas/libros/Edits_Books.java</file>
+            <file>file:/C:/Users/Carlo/Documents/NetBeansProjects/Bibliotecas/src/objectos/Prestamos.java</file>
+            <file>file:/C:/Users/Carlo/Documents/NetBeansProjects/Bibliotecas/src/Vistas/Pedidos/Prestamos_Realizar.java</file>
+            <file>file:/C:/Users/Carlo/Documents/NetBeansProjects/Bibliotecas/src/DAO/PedidosDAO.java</file>
+            <file>file:/C:/Users/Carlo/Documents/NetBeansProjects/Bibliotecas/src/Vistas/Pedidos/Consultar_Prestamos.java</file>
+            <file>file:/C:/Users/Carlo/Documents/NetBeansProjects/Bibliotecas/src/Vistas/user/Menu.java</file>
             <file>file:/C:/Users/Carlo/Documents/NetBeansProjects/Bibliotecas/src/DAO/UsuarioDAO.java</file>
-            <file>file:/C:/Users/Carlo/Documents/NetBeansProjects/Bibliotecas/src/DAO/LibrosDAO.java</file>
+            <file>file:/C:/Users/Carlo/Documents/NetBeansProjects/Bibliotecas/src/Vistas/libros/Edits_Books.java</file>
             <file>file:/C:/Users/Carlo/Documents/NetBeansProjects/Bibliotecas/src/Vistas/user/edit_user.java</file>
-            <file>file:/C:/Users/Carlo/Documents/NetBeansProjects/Bibliotecas/src/Connection/DatabaseConnection.java</file>
+            <file>file:/C:/Users/Carlo/Documents/NetBeansProjects/Bibliotecas/src/DAO/LibrosDAO.java</file>
+            <file>file:/C:/Users/Carlo/Documents/NetBeansProjects/Bibliotecas/src/Vistas/Pedidos/Menu_Pedidos.java</file>
         </group>
     </open-files>
 </project-private>

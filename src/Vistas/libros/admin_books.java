@@ -173,7 +173,7 @@ public class admin_books extends javax.swing.JFrame {
         }
         LibrosDAO DAO= new LibrosDAO();
         DAO.insertar_Libros(Nombre, 1, Categoria, Cantidad);
-        JOptionPane.showMessageDialog(this, "Insercion de datos","Insercion Exitosa", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Insercion Exitosa","Insercion de datos", JOptionPane.INFORMATION_MESSAGE);
         }catch(Exception ex){
              JOptionPane.showMessageDialog(this, "Error al insertar el dato rellene campos o asigne el formato adecuado","Error de insercion", JOptionPane.ERROR_MESSAGE);
         }

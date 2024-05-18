@@ -50,7 +50,7 @@ public class LibrosDAO {
         }
     }
 
-    public Libros busqueda_Libros(int ID) {
+    public Libros busqueda_Libros(int ID) { 
         String Query = "SELECT * FROM libros where ID=?";
         try (Connection conn = DatabaseConnection.getConnection(); PreparedStatement statement = conn.prepareStatement(Query)) {
             statement.setInt(1, ID);

@@ -252,14 +252,14 @@ public class edit_user extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        try{
         String Carnet= txtCarnet.getText();
         UsuarioDAO DAO= new UsuarioDAO();
         Usuario us=DAO.Busqueda_usuario(Carnet);
         String Nombre= us.getNOMBRE();
         int rol=us.getID_ROL();
         int Estado=us.getID_ESTADO();
-        System.out.println(rol);
-        System.out.println(Estado);
+       
         if(Estado==1){
             cboEstado.setSelectedIndex(0);
         }else{
@@ -278,7 +278,9 @@ public class edit_user extends javax.swing.JFrame {
         txtCarnet2.setText(us.getCARNET());
         txtLimite.setText(us.getLimites_de_libros()+"");
         txtPassword.setText(us.getPASSWORD());
-        
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this, "No existe el carnet","Busqueda", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoActionPerformed
@@ -314,9 +316,9 @@ public class edit_user extends javax.swing.JFrame {
         DAO.Actualizar_usuario(Nombre, Apellido, Carnet, Rol, Estado, Limites, Password, Carnet2);
        jButton1.setEnabled(true);
        txtCarnet.setEditable(true);
-       JOptionPane.showMessageDialog(this, "Edicion de datos","Los datos se editaron exitosamente", JOptionPane.INFORMATION_MESSAGE);
+       JOptionPane.showMessageDialog(this, "Los datos se editaron exitosamente","Edicion de datos", JOptionPane.INFORMATION_MESSAGE);
         }catch(Exception ex){
-            JOptionPane.showMessageDialog(this, "ERROR DE DATOS","Existe un error de datos ", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Existe un error de datos ","ERROR DE DATOS", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -326,7 +328,7 @@ public class edit_user extends javax.swing.JFrame {
             String Carnet= txtCarnet.getText();
         UsuarioDAO DAO= new UsuarioDAO();
         DAO.Delete_User(Carnet);
-        JOptionPane.showMessageDialog(this, "Eliminacion de datos","Eliminacion exitosa", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Eliminacion exitosa","Eliminacion de datos", JOptionPane.INFORMATION_MESSAGE);
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this, "Error de datos","Existe un error de datos: "+ex, JOptionPane.ERROR_MESSAGE);
         }
