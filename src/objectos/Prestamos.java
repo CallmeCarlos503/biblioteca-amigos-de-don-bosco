@@ -11,65 +11,32 @@ import java.time.LocalDate;
  * @author Carlo
  */
 public class Prestamos {
-    int ID;
-    int ID_Libro;
-    String Carnet;
-    int ID_Estado;
-    String Fecha;
-    int Mora;
-    String Nombre_Usuario;
-    String Carnet_Usuario;
-    String Nombre_Libro;
-    String Estado_de_mora;
+    private int ID;
+    private int ID_Libro;
+    private String Carnet;
+    private int ID_Estado;
+    private String Fecha;
+    private int Mora;
 
     public Prestamos() {
     }
 
-    public Prestamos(int ID, int ID_Libro, String Carnet, int ID_Estado, String Fecha, int Mora, String Nombre_Usuario, String Carnet_Usuario, String Nombre_Libro, String Estado_de_mora) {
+    public Prestamos(int ID, int ID_Libro, String Carnet, int ID_Estado, String Fecha, int Mora) {
         this.ID = ID;
         this.ID_Libro = ID_Libro;
         this.Carnet = Carnet;
         this.ID_Estado = ID_Estado;
         this.Fecha = Fecha;
         this.Mora = Mora;
-        this.Nombre_Usuario = Nombre_Usuario;
-        this.Carnet_Usuario = Carnet_Usuario;
-        this.Nombre_Libro = Nombre_Libro;
-        this.Estado_de_mora = Estado_de_mora;
     }
 
-    public String getNombre_Usuario() {
-        return Nombre_Usuario;
+    public int getMora() {
+        return Mora;
     }
 
-    public void setNombre_Usuario(String Nombre_Usuario) {
-        this.Nombre_Usuario = Nombre_Usuario;
+    public void setMora(int Mora) {
+        this.Mora = Mora;
     }
-
-    public String getCarnet_Usuario() {
-        return Carnet_Usuario;
-    }
-
-    public void setCarnet_Usuario(String Carnet_Usuario) {
-        this.Carnet_Usuario = Carnet_Usuario;
-    }
-
-    public String getNombre_Libro() {
-        return Nombre_Libro;
-    }
-
-    public void setNombre_Libro(String Nombre_Libro) {
-        this.Nombre_Libro = Nombre_Libro;
-    }
-
-    public String getEstado_de_mora() {
-        return Estado_de_mora;
-    }
-
-    public void setEstado_de_mora(String Estado_de_mora) {
-        this.Estado_de_mora = Estado_de_mora;
-    }
-    
 
     public int getID() {
         return ID;
@@ -110,13 +77,7 @@ public class Prestamos {
     public void setFecha(String Fecha) {
         this.Fecha = Fecha;
     }
-
-    public int getMora() {
-        return Mora;
-    }
-
-    public void setMora(int Mora) {
-        this.Mora = Mora;
-    }
     
+
+       
 }

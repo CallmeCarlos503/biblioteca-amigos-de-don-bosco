@@ -5,13 +5,16 @@
 package DAO;
 
 import Connection.DatabaseConnection;
+import static Connection.DatabaseConnection.getConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import objectos.Prestamos;
 
 /**
@@ -19,53 +22,33 @@ import objectos.Prestamos;
  * @author Carlo
  */
 public class PedidosDAO {
-     public List<Prestamos> obtenerLibros(String Carnet) {
-        List<Prestamos> Prestamo = new ArrayList<>();
-        try (Connection conn = DatabaseConnection.getConnection(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery("SELECT CONCAT(usuario.NOMBRE,' ',usuario.APELLIDO) AS 'Nombre_usuario',usuario.CARNET AS 'Carnet_usuario', libros.NOMBRE AS 'Nombre_libro', if(prestamos.MORA   =1,'Sin Mora','Mora pendiente') AS 'Estado_de_mora' FROM usuario,libros,prestamos WHERE prestamos.CARNET_USUARIO='"+Carnet+"' AND libros.ID=prestamos.ID_LIBRO;")) {
-            
+     public List<Map<String, Object>> obtenerInfoPrestamos(String carnetUsuario) {
+    List<Map<String, Object>> resultados = new ArrayList<>();
+    try (Connection conn = getConnection();
+         PreparedStatement stmt = conn.prepareStatement(
+             "SELECT CONCAT(usuario.NOMBRE,' ',usuario.APELLIDO) AS 'Nombre_usuario', "
+             + "usuario.CARNET AS 'Carnet_usuario', "
+             + "libros.NOMBRE AS 'Nombre_libro', "
+             + "IF(prestamos.MORA = 1, 'Sin Mora', 'Mora pendiente') AS 'Estado_de_mora' "
+             + "FROM usuario, libros, prestamos "
+             + "WHERE usuario.CARNET = ? "
+             + "AND libros.ID = prestamos.ID_LIBRO")) {
+        stmt.setString(1, carnetUsuario);
+        try (ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
-                int ID=rs.getInt("ID");
-                String Nombre_Usuario=rs.getString("Nombre_usuario");
-                String Carnet_Usuario=rs.getString("Carnet_usuario");
-                String Nombre_libro=rs.getString("Nombre_Libro");
-                String Estado_de_mora=rs.getString("Estado_de_mora");
-                
-                //int ID, int ID_Libro, String Carnet, int ID_Estado, String Fecha, int Mora, String Nombre_Usuario, String Carnet_Usuario, String Nombre_Libro, String Estado_de_mora
-                
-                Prestamos Pre= new Prestamos(1,1,"",1,"",1,Nombre_Usuario,Carnet_Usuario,Nombre_libro,Estado_de_mora);
-                
-                
-                Prestamo.add(Pre);
+                Map<String, Object> fila = new HashMap<>();
+                fila.put("Nombre_usuario", rs.getString("Nombre_usuario"));
+                fila.put("Carnet_usuario", rs.getString("Carnet_usuario"));
+                fila.put("Nombre_libro", rs.getString("Nombre_libro"));
+                fila.put("Estado_de_mora", rs.getString("Estado_de_mora"));
+                resultados.add(fila);
             }
-        } catch (Exception ex) {
-
         }
-        return Prestamo;
+    } catch (Exception ex) {
+        // Manejar excepción
     }
-   public  List<Prestamos> busqueda_Carnet(String Carnet) { 
-        String Query = "";
-        try (Connection conn = DatabaseConnection.getConnection(); PreparedStatement statement = conn.prepareStatement(Query)) {
-            statement.setString(1, Carnet);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
-                    int ID2= resultSet.getInt("ID");
-                    int ID_LIBRO=resultSet.getInt("ID_LIBRO");
-                    int ID_ESTADO=resultSet.getInt("ID_ESTADO");
-                    String Fecha= resultSet.getString("FECHA_DE_PRESTAMO");
-                    int MORA=resultSet.getInt("MORA");
-                    String Nombre= resultSet.getString("Nombre_usuario");
-                    String Carnet_usuario= resultSet.getString("Carnet_usaurio");
-                    String Nombre_Libro=resultSet.getString("Nombre_libro");
-                    String Estado_Mora=resultSet.getString("Estado_de_mora");
-                    Prestamos pre= new Prestamos(ID2,ID_LIBRO,Carnet,ID_ESTADO,Fecha,MORA,Nombre,Carnet_usuario,Nombre_Libro,Estado_Mora);
-                    
-                }
-            }
-        } catch (Exception ex) {
-
-        }
-        return null;
-    }
+    return resultados;
+}
     public void insertar_Libros(int ID_Libro, String Carnet, int estado, String fecha, int Mora) {
         String query = "INSERT INTO prestamos(ID_LIBRO,CARNET_USUARIO,ID_ESTADO,FECHA_DE_PRESTAMO,MORA) VALUES (?,?,?,?,?)";
         try (Connection conn = DatabaseConnection.getConnection(); PreparedStatement statement = conn.prepareStatement(query)) {

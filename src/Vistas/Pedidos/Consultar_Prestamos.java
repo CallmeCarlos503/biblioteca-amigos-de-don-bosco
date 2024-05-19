@@ -8,6 +8,7 @@ import DAO.PedidosDAO;
 import DAO.UsuarioDAO;
 import java.awt.BorderLayout;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -19,40 +20,39 @@ import objectos.Prestamos;
  * @author Carlo
  */
 public class Consultar_Prestamos extends javax.swing.JFrame {
-private JTable TablaPrestamos;
+
+    private JTable TablaPrestamos;
+
     /**
      * Creates new form Consultar_Prestamos
      */
     public Consultar_Prestamos() {
         initComponents();
-        TablaPrestamos= new JTable();
-        JScrollPane scrollPane= new JScrollPane(TablaPrestamos);
+        TablaPrestamos = new JTable();
+        JScrollPane scrollPane = new JScrollPane(TablaPrestamos);
         getContentPane().add(scrollPane, BorderLayout.CENTER);
-        CargarPrestamos();
+        mostrarInfoPrestamosUsuario();
     }
-    private void CargarPrestamos(){
-        DefaultTableModel Model= new DefaultTableModel ();
-        Model.addColumn("Nombre de usuario");
-        Model.addColumn("Carnet");
-        Model.addColumn("Nombre del libro");
-        Model.addColumn("Estado de Mora");
+
+    // En tu clase GUI
+    private void mostrarInfoPrestamosUsuario() {
+        UsuarioDAO DAOS= new UsuarioDAO();
         PedidosDAO DAOP= new PedidosDAO();
-        UsuarioDAO DAOUS= new UsuarioDAO();
-        String Carnet=DAOUS. Carnet_permanencia;
-        Prestamos pres= new Prestamos();
-        List<Prestamos> presta= DAOP.busqueda_Carnet(Carnet);
-        for(Prestamos prestamos: presta){
-            Object[] fila={
-              prestamos.getNombre_Usuario(),
-                prestamos.getCarnet_Usuario(),
-                prestamos.getNombre_Libro(),
-                prestamos.getEstado_de_mora()
+        String carnetUsuario =DAOS.Carnet_permanencia; // Obtener el carnet del usuario
+        List<Map<String, Object>> resultados = DAOP.obtenerInfoPrestamos(carnetUsuario);
+        DefaultTableModel model = (DefaultTableModel) JTable_prestamos.getModel();
+        model.setRowCount(0); // Limpiar filas existentes
+        
+        for (Map<String, Object> fila : resultados) {
+            Object[] datos = {
+                fila.get("Nombre_usuario"),
+                fila.get("Carnet_usuario"),
+                fila.get("Nombre_libro"),
+                fila.get("Estado_de_mora")
             };
-            Model.addRow(fila);
+            model.addRow(datos);
         }
-        JTable_prestamos.setModel(Model);
     }
-      
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -65,6 +65,7 @@ private JTable TablaPrestamos;
 
         jScrollPane1 = new javax.swing.JScrollPane();
         JTable_prestamos = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,10 +77,19 @@ private JTable TablaPrestamos;
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Usuario", "Carnet", "Libro", "Mora"
             }
         ));
         jScrollPane1.setViewportView(JTable_prestamos);
+
+        jButton1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/casa-inteligente.png"))); // NOI18N
+        jButton1.setText("Regresar al menu de consultas");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -89,17 +99,30 @@ private JTable TablaPrestamos;
                 .addGap(16, 16, 16)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(376, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Menu_Pedidos pedidos= new Menu_Pedidos();
+        pedidos.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -138,6 +161,7 @@ private JTable TablaPrestamos;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable JTable_prestamos;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
