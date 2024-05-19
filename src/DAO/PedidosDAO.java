@@ -32,7 +32,7 @@ public class PedidosDAO {
              + "IF(prestamos.MORA = 1, 'Sin Mora', 'Mora pendiente') AS 'Estado_de_mora' "
              + "FROM usuario, libros, prestamos "
              + "WHERE usuario.CARNET = ? "
-             + "AND libros.ID = prestamos.ID_LIBRO")) {
+             + "AND libros.ID = prestamos.ID_LIBRO AND prestamos.ID_USUARIO=usuario.ID;")) {
         stmt.setString(1, carnetUsuario);
         try (ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
